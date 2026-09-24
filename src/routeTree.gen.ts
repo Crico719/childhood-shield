@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DenunciarRouteImport } from './routes/denunciar'
+import { Route as LineasRouteImport } from './routes/lineas'
 import { Route as SenalesRouteImport } from './routes/senales'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const DenunciarRoute = DenunciarRouteImport.update({
   path: '/denunciar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LineasRoute = LineasRouteImport.update({
+  id: '/lineas',
+  path: '/lineas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SenalesRoute = SenalesRouteImport.update({
   id: '/senales',
   path: '/senales',
@@ -32,30 +38,34 @@ const SenalesRoute = SenalesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/denunciar' | '/senales'
+  fullPaths: '/' | '/denunciar' | '/lineas' | '/senales'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/denunciar' | '/senales'
-  id: '__root__' | '/' | '/denunciar' | '/senales'
+  to: '/' | '/denunciar' | '/lineas' | '/senales'
+  id: '__root__' | '/' | '/denunciar' | '/lineas' | '/senales'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DenunciarRoute: typeof DenunciarRoute
+  LineasRoute: typeof LineasRoute
   SenalesRoute: typeof SenalesRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DenunciarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lineas': {
+      id: '/lineas'
+      path: '/lineas'
+      fullPath: '/lineas'
+      preLoaderRoute: typeof LineasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/senales': {
       id: '/senales'
       path: '/senales'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DenunciarRoute: DenunciarRoute,
+  LineasRoute: LineasRoute,
   SenalesRoute: SenalesRoute,
 }
 export const routeTree = rootRouteImport
