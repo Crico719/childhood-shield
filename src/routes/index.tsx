@@ -68,9 +68,7 @@ function HomePage() {
             Confidencial · Gratuito · 24/7
           </span>
           <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink md:text-6xl">
-            Si ves una señal,
-            <br />
-            <span className="text-brand">actúa a tiempo.</span>
+            hola
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/70">
             Guía clara para familias y adultos: cómo detectar el maltrato
