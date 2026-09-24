@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DenunciarRouteImport } from './routes/denunciar'
 import { Route as SenalesRouteImport } from './routes/senales'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DenunciarRoute = DenunciarRouteImport.update({
+  id: '/denunciar',
+  path: '/denunciar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SenalesRoute = SenalesRouteImport.update({
@@ -25,27 +31,31 @@ const SenalesRoute = SenalesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
   '/senales': typeof SenalesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/senales'
+  fullPaths: '/' | '/denunciar' | '/senales'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/senales'
-  id: '__root__' | '/' | '/senales'
+  to: '/' | '/denunciar' | '/senales'
+  id: '__root__' | '/' | '/denunciar' | '/senales'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DenunciarRoute: typeof DenunciarRoute
   SenalesRoute: typeof SenalesRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/denunciar': {
+      id: '/denunciar'
+      path: '/denunciar'
+      fullPath: '/denunciar'
+      preLoaderRoute: typeof DenunciarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/senales': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DenunciarRoute: DenunciarRoute,
   SenalesRoute: SenalesRoute,
 }
 export const routeTree = rootRouteImport
