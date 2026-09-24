@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DenunciarRouteImport } from './routes/denunciar'
+import { Route as LineasRouteImport } from './routes/lineas'
+import { Route as RecursosRouteImport } from './routes/recursos'
+import { Route as SenalesRouteImport } from './routes/senales'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DenunciarRoute = DenunciarRouteImport.update({
+  id: '/denunciar',
+  path: '/denunciar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LineasRoute = LineasRouteImport.update({
+  id: '/lineas',
+  path: '/lineas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecursosRoute = RecursosRouteImport.update({
+  id: '/recursos',
+  path: '/recursos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SenalesRoute = SenalesRouteImport.update({
+  id: '/senales',
+  path: '/senales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
+  '/recursos': typeof RecursosRoute
+  '/senales': typeof SenalesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
+  '/recursos': typeof RecursosRoute
+  '/senales': typeof SenalesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/denunciar': typeof DenunciarRoute
+  '/lineas': typeof LineasRoute
+  '/recursos': typeof RecursosRoute
+  '/senales': typeof SenalesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/denunciar' | '/lineas' | '/recursos' | '/senales'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/denunciar' | '/lineas' | '/recursos' | '/senales'
+  id: '__root__' | '/' | '/denunciar' | '/lineas' | '/recursos' | '/senales'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DenunciarRoute: typeof DenunciarRoute
+  LineasRoute: typeof LineasRoute
+  RecursosRoute: typeof RecursosRoute
+  SenalesRoute: typeof SenalesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/denunciar': {
+      id: '/denunciar'
+      path: '/denunciar'
+      fullPath: '/denunciar'
+      preLoaderRoute: typeof DenunciarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lineas': {
+      id: '/lineas'
+      path: '/lineas'
+      fullPath: '/lineas'
+      preLoaderRoute: typeof LineasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recursos': {
+      id: '/recursos'
+      path: '/recursos'
+      fullPath: '/recursos'
+      preLoaderRoute: typeof RecursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/senales': {
+      id: '/senales'
+      path: '/senales'
+      fullPath: '/senales'
+      preLoaderRoute: typeof SenalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DenunciarRoute: DenunciarRoute,
+  LineasRoute: LineasRoute,
+  RecursosRoute: RecursosRoute,
+  SenalesRoute: SenalesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
