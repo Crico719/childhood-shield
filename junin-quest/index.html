@@ -45,9 +45,17 @@
   </div>
 </div>
 <div class="stats"><span class="lvl" id="hLvl">Nv 1</span><span class="pill" id="hXP">⚡0</span><span class="pill" id="hGem">💎0</span><span class="pill" id="hFire">🔥0</span></div>
-<div class="lang"><button id="btnDark">🌙</button><button id="btnES" class="on">ES</button><button id="btnEN">EN</button></div>
+<div class="lang"><button id="btnSnd">🔊</button><button id="btnDark">🌙</button><button id="btnES" class="on">ES</button><button id="btnEN">EN</button></div>
 </header>
 <div id="intiAudio" style="display:none"></div>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
+    });
+  }
+</script>
 <main>
 <section id="viewPath">
 <div class="card mascot"><div class="owl">🦉</div><div class="say" id="owlSay">¡Hola! Completa un nodo por día y la racha sube 🔥</div></div>

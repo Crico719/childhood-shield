@@ -1,0 +1,15 @@
+{
+  "name": "PERÚ QUEST",
+  "short_name": "PeruQuest",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fdf8ef",
+  "theme_color": "#58cc02",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3532/3532831.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
