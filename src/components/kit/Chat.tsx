@@ -1,6 +1,80 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, Sparkles, BookOpen, Brain, Calculator } from "lucide-react";
+import { Send, Bot, User, Sparkles, BookOpen, Brain, Calculator, Owl } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const INTI_TASKS = {
+  es: [
+    "¡Ñapay! Sigue así 🦙",
+    "¡Buen trabajo, viajero! 👑",
+    "¡Eso es, campeón! 🔥",
+    "¡Poco a poco se llega lejos! 🗺️",
+    "¡Vamos, Inti te acompaña! 🇵🇪",
+  ],
+  en: [
+    "¡Ñapay! Keep going 🦙",
+    "Great job, traveler! 👑",
+    "That's it, champion! 🔥",
+    "Little by little we go far! 🗺️",
+    "Let's go, Inti is with you! 🇵🇪",
+  ],
+};
+
+const intiMsg = (lang: string) => {
+  const arr = INTI_TASKS[lang as "es" | "en"];
+  return arr[Math.floor(Math.random() * arr.length)];
+};
+
+const INtiMascot = ({ lang }: { lang: string }) => {
+  const [showBubble, setShowBubble] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (showBubble) {
+      setMessage(intiMsg(lang));
+      const timer = setTimeout(() => setShowBubble(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showBubble, lang]);
+
+  return (
+    <div className="relative inline-block cursor-pointer animate-pulse" onClick={() => setShowBubble(true)}>
+      <div className="block">
+        <svg viewBox="0 0 200 200" width="36" height="36" className="block">
+          <defs>
+            <linearGradient id="intiBody" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="100%" stopColor="#e7e5e4" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="95" cy="142" rx="40" ry="30" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" />
+          <ellipse cx="70" cy="132" rx="26" ry="25" fill="#e7e5e4" />
+          <ellipse cx="140" cy="92" rx="20" ry="22" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" />
+          <ellipse cx="114" cy="106" rx="12" ry="24" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" />
+          <ellipse cx="128" cy="80" rx="6" ry="13" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" transform="rotate(-30 128 80)" />
+          <ellipse cx="152" cy="76" rx="6" ry="13" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" transform="rotate(30 152 76)" />
+          <circle cx="130" cy="88" rx="4" fill="#1a202c" />
+          <circle cx="132" cy="86" rx="2" fill="white" />
+          <circle cx="150" cy="88" rx="4" fill="#1a202c" />
+          <circle cx="152" cy="86" rx="2" fill="white" />
+          <ellipse cx="140" cy="98" rx="4" ry="2.5" fill="#d6d3d1" />
+          <path d="M136 102 Q140 105 144 102" stroke="#d6d3d1" strokeWidth="2" fill="none" />
+          <path d="M95 142 Q155 132 165 162 Q155 182 125 182 Q95 182 95 142" fill="url(#intiBody)" stroke="#d6d3d1" strokeWidth="2" />
+          <rect x="101" y="162" width="10" height="26" fill="#d6d3d1" stroke="#d6d3d1" strokeWidth="2" />
+          <rect x="126" y="162" width="10" height="26" fill="#e7e5e4" stroke="#d6d3d1" strokeWidth="2" />
+          <rect x="76" y="162" width="10" height="26" fill="#e7e5e4" stroke="#d6d3d1" strokeWidth="2" />
+          <rect x="51" y="162" width="10" height="26" fill="#d6d3d1" stroke="#d6d3d1" strokeWidth="2" />
+          <ellipse cx="56" cy="162" rx="13" ry="7" fill="#e7e5e4" stroke="#d6d3d1" strokeWidth="2" transform="rotate(45 56 162)" />
+        </svg>
+      </div>
+      {showBubble && (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 -top-2 bg-card border-2 border-border rounded-xl px-3 py-2 text-sm whitespace-nowrap shadow-lg z-10">
+          <span className="text-xs text-primary font-bold">Inti dice:</span>
+          <div className="text-foreground">{message}</div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 type Message = {
   id: string;
@@ -272,9 +346,12 @@ export function Chat() {
         <div className="grid size-10 place-items-center rounded-full bg-primary/10">
           <Bot className="size-5 text-primary" />
         </div>
-        <div>
-          <h1 className="font-semibold">MaChat</h1>
-          <p className="text-xs text-muted-foreground">Tu tutor IA de estudio</p>
+        <div className="flex items-center gap-2">
+          <INtiMascot lang={lang} />
+          <div>
+            <h1 className="font-semibold">MaChat</h1>
+            <p className="text-xs text-muted-foreground">Tu tutor IA de estudio</p>
+          </div>
         </div>
         <div className="ml-auto flex items-center gap-1">
           <span className="size-2 rounded-full bg-success animate-pulse" />
