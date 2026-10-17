@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>PERÚ QUEST 🇵🇪 - Los 25 departamentos jugando</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<header class="top">
+<div class="brand">🇵🇪 PERÚ QUEST</div>
+<div class="mascot-wrap" id="mascotWrap" title="Inti tu mascota">
+  <div class="inti" id="inti">
+    <svg class="inti-svg" viewBox="0 0 200 200" width="44" height="44">
+      <defs>
+        <radialGradient id="bodyGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff"/>
+          <stop offset="100%" stop-color="#e7e5e4"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="95" cy="142" rx="40" ry="30" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2"/>
+      <ellipse cx="70" cy="132" rx="26" ry="25" fill="#e7e5e4"/>
+      <ellipse cx="140" cy="92" rx="20" ry="22" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2"/>
+      <ellipse cx="114" cy="106" rx="12" ry="24" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2"/>
+      <ellipse cx="128" cy="80" rx="6" ry="13" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2" transform="rotate(-30 128 80)"/>
+      <ellipse cx="152" cy="76" rx="6" ry="13" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2" transform="rotate(30 152 76)"/>
+      <circle class="inti-eye" cx="130" cy="88" rx="3.5" fill="#1a202c"/>
+      <circle cx="132" cy="86.5" rx="1.5" fill="white"/>
+      <circle class="inti-eye" cx="150" cy="88" rx="3.5" fill="#1a202c"/>
+      <circle cx="152" cy="86.5" rx="1.5" fill="white"/>
+      <ellipse cx="140" cy="98" rx="3.5" ry="1.8" fill="#d6d3d1"/>
+      <path d="M136 102 Q140 105 144 102" stroke="#d6d3d1" stroke-width="2" fill="none"/>
+      <path d="M95 142 Q155 132 165 162 Q155 182 125 182 Q95 182 95 142" fill="url(#bodyGrad)" stroke="#d6d3d1" stroke-width="2"/>
+      <rect x="101" y="162" width="10" height="26" fill="#d6d3d1" stroke="#d6d3d1" stroke-width="2"/>
+      <rect x="126" y="162" width="10" height="26" fill="#e7e5e4" stroke="#d6d3d1" stroke-width="2"/>
+      <rect x="76" y="162" width="10" height="26" fill="#e7e5e4" stroke="#d6d3d1" stroke-width="2"/>
+      <rect x="51" y="162" width="10" height="26" fill="#d6d3d1" stroke="#d6d3d1" stroke-width="2"/>
+      <ellipse cx="56" cy="162" rx="13" ry="7" fill="#e7e5e4" stroke="#d6d3d1" stroke-width="2" transform="rotate(45 56 162)"/>
+      <path id="intiMouth" d="M136 102 Q140 105 144 102" stroke="#d6d3d1" stroke-width="2" fill="none"/>
+    </svg>
+    <div class="inti-bubble" id="intiBubble" style="display:none"></div>
+  </div>
+</div>
+<div class="stats"><span class="lvl" id="hLvl">Nv 1</span><span class="pill" id="hXP">⚡0</span><span class="pill" id="hGem">💎0</span><span class="pill" id="hFire">🔥0</span></div>
+<div class="lang"><button id="btnDark">🌙</button><button id="btnES" class="on">ES</button><button id="btnEN">EN</button></div>
+</header>
+<div id="intiAudio" style="display:none"></div>
+<main>
+<section id="viewPath">
+<div class="card mascot"><div class="owl">🦉</div><div class="say" id="owlSay">¡Hola! Completa un nodo por día y la racha sube 🔥</div></div>
+<div class="card"><h3>🎯 Reto diario</h3><p class="hint">5 preguntas de todo el Perú. Gana 💎+10.</p><div class="row"><button id="btnDaily">Jugar reto</button></div></div>
+<div id="path"></div>
+<div class="card"><h3>🏅 Logros</h3><div class="achieve" id="achieve"></div></div>
+<div class="hero">
+<div class="heroE">🏔️🏖️🌳</div>
+<h2 id="heroT">Perú, 25 departamentos</h2>
+<p id="heroD">De Tumbes a Tacna: recorre los 25 departamentos, aprende su tesoro y gana coronas jugando.</p>
+<div class="facts">
+<div>🗺️<b>25</b><small>departamentos</small></div>
+<div>⭐<b>25</b><small>coronas</small></div>
+<div>📝<b>Quiz</b><small>+ minijuegos</small></div>
+<div>🏆<b>XP</b><small>y racha</small></div>
+</div>
+</div>
+<div id="path"></div>
+<div class="card">
+<h3>🗺️ Explora Junín</h3>
+<div class="explore" id="exploreGrid"></div>
+</div>
+<div class="card">
+<h3>🎯 Mi aventura</h3>
+<div class="hint" id="missionTxt"></div>
+<div class="bar"><i id="xpBar" style="width:0%"></i></div>
+</div>
+<div class="card"><h3>🧪 Evidencia para profes/jueces</h3>
+<div class="row"><input id="testerName" placeholder="Tu nombre (ej: Diego 4B)"/><button id="btnEvidence">⬇ Evidencia</button></div>
+<div class="hint" id="evMsg"></div></div>
+</section>
+<section id="viewLesson" style="display:none">
+<div class="row"><button id="btnBack" class="ghost">← Camino</button><span id="lesTitle"></span><span style="flex:1"></span><button id="btnPrev" class="ghost">‹ Ant</button><button id="btnNext" class="ghost">Sig ›</button></div>
+<div class="row" id="secTabs">
+<button data-sec="hist">📜 Historia</button>
+<button data-sec="lug" class="ghost">📍 Lugares</button>
+<button data-sec="play" class="ghost">🎮 Jugar</button>
+</div>
+<div class="hint" id="secProg"></div>
+<div class="card" id="secHist"><figure><img id="lesImg" style="display:none" alt="foto lugar"/><figcaption id="lesCap"></figcaption></figure><p id="lesText"></p><p class="sec">📜 Historia y ⚠️ amenazas</p><p class="hint" id="lesMore" style="font-size:14px"></p></div>
+<div class="card" id="secLug" style="display:none"><figure><img id="lesImg2" style="display:none" alt="foto lugar"/><figcaption id="lesCap2"></figcaption></figure><p class="sec">🌿 Para visitar</p><p class="hint" id="lesVisit" style="font-size:14px"></p><p class="hint" id="lesVisit2" style="font-size:14px"></p><p class="sec">📍 Top lugares</p><div id="lesSpots" style="font-size:14px"></div><p class="sec">🍽️ Sabores y 🎭 fiestas</p><p class="hint" id="lesFood" style="font-size:14px"></p><p class="sec">👤 Personaje</p><p class="hint" id="lesHero" style="font-size:14px"></p><div class="factchips" id="lesFacts"></div><p class="hint">📷 Fotos: Wikimedia Commons / Wikipedia (uso educativo).</p></div>
+<div class="card" id="secPlay" style="display:none"><div class="row"><button id="btnVoice">🔊 Escuchar</button><button id="btnStartQ">📝 Quiz</button></div><div id="gameBox" style="margin-top:8px"></div></div>
+</section>
+</main>
+<div id="quizM" class="modal" style="display:none"><div class="card"><h2 id="qTitle">📝 Quiz</h2><div id="qBody"></div><div class="row"><button id="qClose" class="ghost">Cerrar</button></div></div></div>
+<div id="detM" class="modal" style="display:none"><div class="card"><h2 id="detT"></h2><p id="detB"></p><div class="row"><button id="detHear">🔊 Escuchar</button><button id="detOk" class="ghost">Cerrar</button></div></div></div>
+<script src="app.js?v=1"></script>
+</body>
+</html>
